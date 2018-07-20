@@ -1,0 +1,9 @@
+rootProject.name = 'sonet'
+
+//include "ui-service"
+include "gtwy-service"
+include "auth-service"
+//include "stream-service"
+include "accounts-service"
+//include "repo-service"
+//include "core-service"

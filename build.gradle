@@ -1,0 +1,85 @@
+buildscript {
+    ext {
+        depMgmVer = "1.0.5.RELEASE"
+        springBootVersion = '2.0.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("io.spring.gradle:dependency-management-plugin:${depMgmVer}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+version = '0.0.1-SNAPSHOT'
+
+
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    group = 'ua.pp.sola'
+
+}
+subprojects {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    ext {
+        springBootAdminVersion = '2.0.1'
+        springCloudVersion = 'Finchley.RELEASE'
+        SLF4J_VER = '1.7.25'
+        JUNIT_VER = '4.12'
+    }
+
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter')
+        compile('org.springframework.boot:spring-boot-starter-web')
+
+//	    compile('de.codecentric:spring-boot-admin-starter-client')
+//	    compile('de.codecentric:spring-boot-admin-starter-server')
+
+        compile "org.slf4j:slf4j-api:${SLF4J_VER}"
+        compile "org.slf4j:slf4j-log4j12:${SLF4J_VER}"
+
+        runtime('org.springframework.boot:spring-boot-devtools')
+        runtime('org.springframework.boot:spring-boot-starter-actuator')
+//        runtime('com.h2database:h2')
+//        runtime('org.postgresql:postgresql')
+
+        compileOnly('org.projectlombok:lombok')
+
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        testCompile "junit:junit:${JUNIT_VER}"
+        // https://mvnrepository.com/artifact/org.mockito/mockito-all
+        testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+        // https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4
+        testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.4'
+
+
+    }
+
+    dependencyManagement {
+        imports {
+//            mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+}
+task wrapper(type: Wrapper) {
+    gradleVersion = "4.9"
+}
+
+dependencies {
+}
