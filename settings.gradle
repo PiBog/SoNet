@@ -7,3 +7,5 @@ include "auth-service"
 include "accounts-service"
 //include "repo-service"
 //include "core-service"
+include 'config-service'
+
