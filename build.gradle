@@ -20,8 +20,9 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
     group = 'ua.pp.sola'
-
 }
+
+
 subprojects {
     repositories {
         mavenCentral()
@@ -30,7 +31,6 @@ subprojects {
 
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
-    apply plugin: 'org.springframework.cloud'
     apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = 1.8
@@ -43,9 +43,17 @@ subprojects {
         JUNIT_VER = '4.12'
     }
 
+    configurations {
+        compile.exclude group: 'ch.qos.logback'
+    }
+
     dependencies {
+
         compile('org.springframework.boot:spring-boot-starter')
         compile('org.springframework.boot:spring-boot-starter-web')
+        // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter
+        compile group: 'org.springframework.cloud', name: 'spring-cloud-starter', version: '2.0.0.RELEASE'
+
 
 //	    compile('de.codecentric:spring-boot-admin-starter-client')
 //	    compile('de.codecentric:spring-boot-admin-starter-server')
@@ -55,6 +63,7 @@ subprojects {
 
         runtime('org.springframework.boot:spring-boot-devtools')
         runtime('org.springframework.boot:spring-boot-starter-actuator')
+
 //        runtime('com.h2database:h2')
 //        runtime('org.postgresql:postgresql')
 

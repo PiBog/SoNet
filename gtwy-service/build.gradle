@@ -1,8 +1,18 @@
 version = '0.0.1-SNAPSHOT'
 
-dependencies {
-
+ext {
+    springCloudStarterVersion = '2.0.0.RELEASE'
 }
 
+dependencies {
 
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.0.0.RELEASE'
 
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: '2.0.0.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-zuul
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-zuul', version: '2.0.0.RELEASE'
+
+}

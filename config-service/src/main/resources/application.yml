@@ -1,9 +1,15 @@
 server:
-  port: 8888
+  port: 8081
 
 spring:
   cloud:
     config:
       server:
         git:
-          uri: file://${user.home}/config-repo
+          uri: https://github.com/PiBog/SoNet/config-repo
+          skipSslValidation: true
+  profiles:
+    active: native
+  security:
+    user:
+      password: ${CONFIG_SERVICE_PASSWORD}

@@ -1,0 +1,49 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+zuul:
+  prefix: /api
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    auth-service:
+      path: /secure/**
+      url: http://auth-service:8082
+      strip-prefix: false
+      sensitiveHeaders:
+
+    accounts-service:
+      path: /accounts/**
+      serviceId: accounts-service
+      strip-prefix: false
+      sensitiveHeaders:
+
+    accounts-service:
+      path: /accounts/**
+      serviceId: accounts-service
+      strip-prefix: false
+      sensitiveHeaders:
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://discovery:9091/eureka/
+
+server:
+  port: 8080
